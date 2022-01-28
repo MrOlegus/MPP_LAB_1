@@ -1,0 +1,68 @@
+* {
+    padding: 0;
+    font-family: monospace;
+}
+
+h1 {
+    color: rgb(0, 0, 0);
+    background-color: rgb(0, 170, 170);
+    font-weight: normal;
+    text-align: center;
+    font-size: 5vh;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: rgb(0, 0, 132);
+}
+
+.reviews {
+    color: rgb(255, 255, 0);
+    font-weight: normal;
+    font-size: 3vh;
+    margin-bottom: 30px;
+}
+
+.mainText {
+    color: rgb(255, 255, 0);
+    font-weight: normal;
+    font-size: 3vh;
+}
+
+.author_and_mark {
+    display: flex;
+}
+
+.author {
+    color: rgb(255, 255, 255);
+}
+
+.mark {
+   margin-left: 10px;
+   background-image: url(../pics\\stars.png);
+   background-position: left top;
+   background-size:cover;
+   height: 20px;
+}
+
+.sendButton {
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 34px;
+}
+
+.reviewArea {
+    resize: none;
+    font-size: 3vh;
+}
+
+.time {
+    color: rgb(255, 255, 255);
+}
+
+.radioMarks {
+    color: rgb(255, 255, 0);
+    font-weight: normal;
+    font-size: 3vh;
+}

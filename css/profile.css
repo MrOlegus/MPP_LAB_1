@@ -1,0 +1,50 @@
+* {
+    padding: 0;
+    font-family: monospace;
+}
+
+h1 {
+    color: rgb(0, 0, 0);
+    background-color: rgb(0, 170, 170);
+    font-weight: normal;
+    text-align: center;
+    font-size: 5vh;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: rgb(0, 0, 132);
+}
+
+.taskRefDiv {
+    font-size: 20px;
+    background: rgb(187, 187, 187);
+    width: 60px;
+    text-decoration: none;
+    text-align: center;
+    margin: 3px 3px 3px 3px;
+}
+
+.solvedTask {
+    background-color: rgb(255, 255, 0);
+}
+
+.taskRef {
+    text-decoration: none;
+    width: 60px;
+}
+
+.difficulty {
+    color: rgb(255, 255, 0);
+    font-weight: normal;
+    font-size: 25px;
+}
+
+.exitInput {
+	flex-grow: 1;
+	outline: none;
+	font-size: 25px;
+	margin: 3px 3px 3px 3px;
+}
