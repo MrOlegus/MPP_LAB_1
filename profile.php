@@ -12,23 +12,22 @@
          <link rel="icon" href="http://f0586911.xsph.ru/pics/favicon.png" type="image/png">
     </head>
     <body>
-        <?php
-            require './modules\MySql.php';
-            require './modules\User.php';
-            require './modules\Content.php';
+        <?php>
+            require './modules/MySql.php';
+            require './modules/User.php';
+            require './modules/Content.php';
             
             CreateUserSession();
             
             $link = MySqlConnect();
             AddVisiting($link, "profile.php");
             
-            if (isset($_SESSION['login']))
-            {
             $enterHeaderWord = $_SESSION['login'];
             $enterHeaderWordRef = "profile.php";
-            }
-            else
+            if ($enterHeaderWord == "") 
             {
+                if ($_GET['ln'] == 'en')
+                $enterHeaderWord = "enter"; else
                 $enterHeaderWord = "войти";
                 $enterHeaderWordRef = "registration.php";
             }
@@ -36,6 +35,10 @@
         
         <?php
         $home = "главная"; $play = "играть"; $create = "создать"; $reviews = "отзывы";
+        if ($_GET['ln'] == 'en')
+        {
+            $home = "home"; $play = "play"; $create = "create"; $reviews = "reviews";
+        }
         ?>
         <header class="header">   
             <div class="headerBlock"><a class="headerWord" href="index.php"><?php echo $home;?></a></div>
@@ -72,7 +75,7 @@
         if (isset($_POST['exit']))
         {
             session_destroy();
-            exit("<meta http-equiv='refresh' content='0; url= http://localhost/sokoban/index.php'>");
+            exit("<meta http-equiv='refresh' content='0; url= /index.php'>");
         }
         ?>
         

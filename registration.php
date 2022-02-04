@@ -12,23 +12,22 @@
          <link rel="icon" href="http://f0586911.xsph.ru/pics/favicon.png" type="image/png">
     </head>
     <body>
-        <?php
-            require './modules\MySql.php';
-            require './modules\User.php';
-            require './modules\Content.php';
+        <?php>
+            require './modules/MySql.php';
+            require './modules/User.php';
+            require './modules/Content.php';
             
             CreateUserSession();
             
             $link = MySqlConnect();
             AddVisiting($link, "registration.php");
             
-            if (isset($_SESSION['login']))
-            {
             $enterHeaderWord = $_SESSION['login'];
             $enterHeaderWordRef = "profile.php";
-            }
-            else
+            if ($enterHeaderWord == "") 
             {
+                if ($_GET['ln'] == 'en')
+                $enterHeaderWord = "enter"; else
                 $enterHeaderWord = "войти";
                 $enterHeaderWordRef = "registration.php";
             }
@@ -36,6 +35,10 @@
         
         <?php
         $home = "главная"; $play = "играть"; $create = "создать"; $reviews = "отзывы";
+        if ($_GET['ln'] == 'en')
+        {
+            $home = "home"; $play = "play"; $create = "create"; $reviews = "reviews";
+        }
         ?>
         <header class="header">   
             <div class="headerBlock"><a class="headerWord" href="index.php"><?php echo $home;?></a></div>
@@ -76,7 +79,7 @@
                     {
                         RegisterUser($link, $_POST['login'], $_POST['password']);
                         EnterUser($_POST['login']);
-                        header("Location: http://localhost/sokoban/index.php");
+                        header("Location: http://f0586911.xsph.ru");
                     }
                 } else
                 {
@@ -89,7 +92,7 @@
                 if (PasswordIsCorrect($link, $_POST['login'], $_POST['password']))
                 {
                     EnterUser($_POST['login']);
-                    header("Location: http://localhost/sokoban/index.php");
+                    header("Location: http://f0586911.xsph.ru");
                 } else
                 {
                     $errorText = GetWrongPasswordOrLoginMessage();
@@ -97,7 +100,7 @@
             }
         ?>
         
-        <div><span class="errorText"><?php echo @$errorText; ?></span></div>
+        <div><span class="errorText"><?php echo $errorText; ?></span></div>
 		
 		<br><br><br><br><br><br><br><br><br><br><br><br>
 		

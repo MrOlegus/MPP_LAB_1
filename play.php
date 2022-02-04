@@ -15,23 +15,22 @@
         
         
         
-        <?php
-            require './modules\MySql.php';
-            require './modules\User.php';
-            require './modules\Content.php';
+        <?php>
+            require './modules/MySql.php';
+            require './modules/User.php';
+            require './modules/Content.php';
             
             CreateUserSession();
             
             $link = MySqlConnect();
             AddVisiting($link, "play.php");
 
-            if (isset($_SESSION['login']))
-            {
             $enterHeaderWord = $_SESSION['login'];
             $enterHeaderWordRef = "profile.php";
-            }
-            else
+            if ($enterHeaderWord == "") 
             {
+                if ($_GET['ln'] == 'en')
+                $enterHeaderWord = "enter"; else
                 $enterHeaderWord = "войти";
                 $enterHeaderWordRef = "registration.php";
             }
@@ -39,6 +38,10 @@
         
         <?php
         $home = "главная"; $play = "играть"; $create = "создать"; $reviews = "отзывы";
+        if ($_GET['ln'] == 'en')
+        {
+            $home = "home"; $play = "play"; $create = "create"; $reviews = "reviews";
+        }
         ?>
         <header class="header">   
             <div class="headerBlock"><a class="headerWord" href="index.php"><?php echo $home;?></a></div>

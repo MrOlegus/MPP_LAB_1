@@ -3,8 +3,8 @@
 function MySqlConnect()
 {
     $host = 'localhost';
-    $user = 'root';
-    $pass = '';
-    $db_name = 'f0586911_socoban';
+    $user = 'f0586911_Socoban';
+    $pass = 'cube3x3';
+    $db_name = 'f0586911_Socoban';
     return mysqli_connect($host, $user, $pass, $db_name);
 }

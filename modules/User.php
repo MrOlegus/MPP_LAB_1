@@ -17,7 +17,7 @@ function AddVisiting($link, $pageName)
 
 function DeleteOldSessions($sessionAge)
 {
-    session_save_path('./tmp\f0586911');
+    session_save_path("/tmp/f0586911");
     
     if ($sessionDir = opendir(session_save_path())) {
         while ($file = readdir($sessionDir))
@@ -41,7 +41,9 @@ function DeleteOldSessions($sessionAge)
 
 function OnlineUsers($activeTime) // $activeTime - время, за которое пользователь должен перейти на страницу
 {
-    if ($sessionDir = opendir('./tmp\f0586911'))
+    session_save_path("/tmp/f0586911");
+    
+    if ($sessionDir = opendir(session_save_path()))
     {
         $count = 0;
         while ($file = readdir($sessionDir))
@@ -66,9 +68,10 @@ function OnlineUsers($activeTime) // $activeTime - время, за которо
 
 function CreateUserSession()
 {
-    session_save_path('./tmp\f0586911');
+    //mkdir("/tmp/f0586911");
+    session_save_path("/tmp/f0586911");
     session_start();
-    touch('./tmp\f0586911\sess_' . session_id());
+    touch("/tmp/f0586911/sess_" . session_id());
 }
 
 function isValidLogin($login)
@@ -122,6 +125,7 @@ function LoginIsInBase($link, $login)
     $baseLogin = mysqli_fetch_assoc($loginResourse)['login'];
     if ($baseLogin) return true;
     return false;
+    
 }
 
 function PasswordIsCorrect($link, $login, $password)
@@ -150,9 +154,7 @@ function GetSolvedTasks($link, $login)
 {
     $userResourse = mysqli_query($link, "SELECT * FROM Users WHERE `login`='" . $login . "'");
     $user = mysqli_fetch_assoc($userResourse);
-    if (isset($user['solvedTasks']))
-        $solvedTasks = $user['solvedTasks'];
-    else $solvedTasks = '';
+    $solvedTasks = $user['solvedTasks'];
     $m = preg_split('/\s+/', $solvedTasks, -1, PREG_SPLIT_NO_EMPTY);
     return $m;
 }
@@ -164,7 +166,7 @@ function AddTaskToUser($link, $login, $ID)
     {
         $s = "";
         foreach ($m as $elem)
-            $s = $s . $elem . " ";
+        $s = $s . $elem . " ";
         $s = $s . $ID;
         mysqli_query($link, "UPDATE `Users` SET `solvedTasks`='" . $s . "' WHERE `login`='" . $login . "'");
     }

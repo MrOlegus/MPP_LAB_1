@@ -7,7 +7,32 @@ function PrintNews($link, $newsCount, $language)
     while ($news= mysqli_fetch_assoc($newsResource))
     {
         echo "<div class=\"news\">";
-        echo $news['Content_' . $language]." <span class=\"time\">[".$news['Time']."]</span><br><br>";
+        echo $news['Content_' . $language] . " <span class=\"time\">[".$news['Time']."]</span><br><br>";
+        echo "</div>";
+    }
+}
+
+function PrintReviews($link, $sortOrder)
+{
+    $reviewsResource = mysqli_query($link, "SELECT * FROM `Reviews` ORDER BY `$sortOrder` DESC");
+
+    while ($reviews = mysqli_fetch_assoc($reviewsResource))
+    {
+        if ($reviews['AuthorID'] == -1)
+        $author = "Anonymous";
+        else
+        {
+            $authorResource = mysqli_query($link, "SELECT * FROM `Users` WHERE `ID`=" . $reviews['AuthorID']);
+            $author = mysqli_fetch_assoc($authorResource)["login"];
+        }
+        echo "<div class=\"reviews\">";
+        echo    "<div class=\"author_and_mark\">";
+        echo        "<div class=\"author\">" . $author . "</div>";
+        echo        "<div class=\"mark\" style=\"width:" . $reviews['Mark'] * 20 . "px\"></div>";
+        echo    "</div>";
+        
+        echo    "<div>" . $reviews['Text'] . " ";
+        echo    "<span class=\"time\">[".$reviews['Time']."]</span></div>";
         echo "</div>";
     }
 }
