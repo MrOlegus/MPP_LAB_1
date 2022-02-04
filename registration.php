@@ -26,25 +26,16 @@
             $enterHeaderWordRef = "profile.php";
             if ($enterHeaderWord == "") 
             {
-                if ($_GET['ln'] == 'en')
-                $enterHeaderWord = "enter"; else
                 $enterHeaderWord = "войти";
                 $enterHeaderWordRef = "registration.php";
             }
         ?>
         
-        <?php
-        $home = "главная"; $play = "играть"; $create = "создать"; $reviews = "отзывы";
-        if ($_GET['ln'] == 'en')
-        {
-            $home = "home"; $play = "play"; $create = "create"; $reviews = "reviews";
-        }
-        ?>
         <header class="header">   
-            <div class="headerBlock"><a class="headerWord" href="index.php"><?php echo $home;?></a></div>
-            <div class="headerBlock"><a class="headerWord" href="play.php"><?php echo $play;?></a></div>
-            <div class="headerBlock"><a class="headerWord" href="1"><?php echo $create;?></a></div>
-            <div class="headerBlock"><a class="headerWord" href="review.php"><?php echo $reviews;?></a></div>
+            <div class="headerBlock"><a class="headerWord" href="index.php">главная</a></div>
+            <div class="headerBlock"><a class="headerWord" href="play.php">играть</a></div>
+            <div class="headerBlock"><a class="headerWord" href="1">создать</a></div>
+            <div class="headerBlock"><a class="headerWord" href="review.php">отзывы</a></div>
             <div class="headerBlock"><a class="headerWord" href=<?php echo $enterHeaderWordRef;?>><?php echo $enterHeaderWord?></a></div>
         </header>
         
