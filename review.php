@@ -54,8 +54,10 @@
                 <span><input class="radioMark" name="mark" type="radio" value="5" checked>5</span>
             </p>
     
-            <input type="hidden" name="MAX_FILE_SIZE" value="30000" />
-            <p class="mainText">Прикрепить картинку: <input name="userfile" type="file" /></p>
+            <input type="hidden" name="MAX_FILE_SIZE" value="30000000" />
+            <p class="mainText">Прикрепить картинку:
+                <input name="reviewPic" type="file" accept="image/*"/>
+            </p>
             
             <p><input class="sendButton" type="submit" value="Отправить"></p>
         </form>
@@ -63,6 +65,16 @@
         <?php
             if (isset($_POST['review']))
             {
+                if (isset($_FILES['reviewPic']))
+                {
+                    $uploadDir = './pics/review_pics/';
+                    $tmpFileName = basename($_FILES['reviewPic']['name']);
+                    $uploadFile = $uploadDir . date('Y-m-d_H-i-s_') . $tmpFileName;
+
+                    if (!move_uploaded_file($_FILES['reviewPic']['tmp_name'], $uploadFile))
+                        $uploadFile = null;
+                }
+                
                 $id = -1;
                 if (isset($_SESSION['login']))
                 {
@@ -71,7 +83,7 @@
                     $id = mysqli_fetch_assoc($authorResource)["ID"];
                 }
                 mysqli_query($link,
-                "INSERT INTO `Reviews`(`AuthorID`, `Time`, `Text`, `Mark`) VALUES (" . $id . ", \"" . date("Y-m-d") . "\", \"" . $_POST['review'] . "\", " . $_POST['mark'] . ")");
+                "INSERT INTO `Reviews`(`AuthorID`, `Time`, `Text`, `Mark`, `picPath`) VALUES (" . $id . ", \"" . date("Y-m-d H:i:s") . "\", \"" . $_POST['review'] . "\", " . $_POST['mark'] . ", \"" . $uploadFile . "\")");
             }
         ?>
         

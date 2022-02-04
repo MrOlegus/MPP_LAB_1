@@ -33,6 +33,11 @@ function PrintReviews($link, $sortOrder)
         
         echo    "<div>" . $reviews['Text'] . " ";
         echo    "<span class=\"time\">[".$reviews['Time']."]</span></div>";
+        
+        if ($reviews['picPath'] != null)
+        {
+            echo "<div style=\"margin-top: 10px;\"><img width=\"400\" src=\"" . $reviews['picPath'] . "\" alt=\"Простите, картинки не будет\"></div>";
+        }
         echo "</div>";
     }
 }
