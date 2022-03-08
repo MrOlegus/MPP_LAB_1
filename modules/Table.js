@@ -13,10 +13,12 @@ function CreateTableAsLink(rowCount, columnCount, w, pos, ID)
             var num = i * columnCount + j;
             var td = tr.insertCell();
             var image = document.createElement('img');
+            
             image.src = "pics/" + pos[num] + ".png";
             image.style = "width:" +  w/columnCount + "px; height:" +  h/rowCount + "px;";
             var a = document.createElement('a');
-            a.href = "task.php?task=" + pos + "&columnCount=" + columnCount + "&rowCount=" + rowCount;
+            a.href = "task?task=" + pos + "&columnCount=" + columnCount + "&rowCount=" + rowCount;
+            a.classList.add("link_internal");
             a.appendChild(image);
             td.appendChild(a);
         }

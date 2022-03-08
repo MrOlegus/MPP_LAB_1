@@ -83,7 +83,10 @@
                     $id = mysqli_fetch_assoc($authorResource)["ID"];
                 }
                 mysqli_query($link,
-                "INSERT INTO `Reviews`(`AuthorID`, `Time`, `Text`, `Mark`, `picPath`) VALUES (" . $id . ", \"" . date("Y-m-d H:i:s") . "\", \"" . $_POST['review'] . "\", " . $_POST['mark'] . ", \"" . $uploadFile . "\")");
+                "INSERT INTO `Reviews`(`AuthorID`, `Time`, `Text`, `Mark`, `picPath`) VALUES (" . $id . ", \"" . date("Y-m-d H:i:s") . "\", \""
+                . mysqli_real_escape_string($link, $_POST['review']) . "\", "
+                . mysqli_real_escape_string($link, $_POST['mark']) . ", \""
+                . $uploadFile . "\")");
             }
         ?>
         

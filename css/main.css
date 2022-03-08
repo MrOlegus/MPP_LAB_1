@@ -1,0 +1,155 @@
+.main {
+    display: block;
+}
+
+/*play.php*/
+
+* {
+    padding: 0;
+    font-family: monospace;
+}
+
+h1 {
+    color: rgb(0, 0, 0);
+    background-color: rgb(0, 170, 170);
+    font-weight: normal;
+    text-align: center;
+    font-size: 5vh;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: rgb(0, 0, 132);
+}
+
+.taskTable
+{
+    line-height: 0;
+    border-collapse: collapse;
+}
+
+.task
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-start;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.description
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    font-size: 3vh;
+    color: rgb(255, 255, 255);
+    margin-left: 20px;
+}
+
+/* review.php */
+
+.reviews {
+    color: rgb(255, 255, 0);
+    font-weight: normal;
+    font-size: 3vh;
+    margin-bottom: 30px;
+}
+
+.mainText {
+    color: rgb(255, 255, 0);
+    font-weight: normal;
+    font-size: 3vh;
+}
+
+.author_and_mark {
+    display: flex;
+}
+
+.author {
+    color: rgb(255, 255, 255);
+}
+
+.mark {
+   margin-left: 10px;
+   background-image: url(../pics\\stars.png);
+   background-position: left top;
+   background-size:cover;
+   height: 20px;
+}
+
+.sendButton {
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 34px;
+}
+
+.reviewArea {
+    resize: none;
+    font-size: 3vh;
+}
+
+.time {
+    color: rgb(255, 255, 255);
+}
+
+.radioMarks {
+    color: rgb(255, 255, 0);
+    font-weight: normal;
+    font-size: 3vh;
+}
+
+/* task.php */
+
+.checkInput {
+	flex-grow: 1;
+	outline: none;
+	font-size: 25px;
+	margin: 5px 0px 5px 0px;
+}
+
+.winText {
+    color: rgb(255, 255, 0);
+    font-weight: normal;
+    font-size: 3vh;
+}
+
+.loseText {
+    color: rgb(255, 255, 0);
+    font-weight: normal;
+    font-size: 3vh;
+}
+
+.left {
+    width: 43px;
+    height: 43px;
+    background-image: url(http://f0586911.xsph.ru/pics/left.png);
+    margin-left:50px;
+}
+
+.right {
+    width: 43px;
+    height: 43px;
+    background-image: url(http://f0586911.xsph.ru/pics/right.png);
+    margin-left: 50px;
+}
+
+.up {
+    width: 43px;
+    height: 43px;
+    background-image: url(http://f0586911.xsph.ru/pics/up.png);
+    margin-left: 100px;
+}
+
+.down {
+    width: 43px;
+    height: 43px;
+    background-image: url(http://f0586911.xsph.ru/pics/down.png);
+    margin-left: 100px;
+}
+
+.taskAndRows{
+    display: flex;
+    align-items: center;
+}
