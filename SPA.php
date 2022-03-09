@@ -16,8 +16,39 @@ class Resp
     }
 }
 
-$resp = new Resp('ooooooooooooooooops');
+$resp = new Resp('<h1>oops<h1>');
 
+$postData = file_get_contents('php://input');
+$data = json_decode($postData, true);
+
+foreach(array_keys($data) as $key)
+    $_POST[$key] = $data[$key];
+
+if (isset($_POST['registration'])) // регистрация
+{
+    $resp = new Resp(GetPage('./SPA/enter.php'));
+}
+else
+if (isset($_POST['enter'])) // вход
+{
+    $resp = new Resp(GetPage('./SPA/enter.php'));
+}
+else
+if (isset($_POST['review'])) // новый отзыв
+{
+    $resp = new Resp(GetPage('./SPA/review.php'));
+}
+else
+if (isset($_POST['sort'])) // сортировка отзывов
+{
+    $resp = new Resp(GetPage('./SPA/review.php'));
+}
+else
+if (isset($_POST['currentPos'])) // клиент прислал ответ на задачу
+{
+    $resp = new Resp(GetPage('./SPA/taskAnswer.php'));
+}
+else
 if (isset($_GET['page'])) // клиент просит страничку
 {
     $page = $_GET['page'];
@@ -28,6 +59,8 @@ if (isset($_GET['page'])) // клиент просит страничку
         case 'play': $resp = new Resp(GetPage('./SPA/play.php')); break;
         case 'review': $resp = new Resp(GetPage('./SPA/review.php')); break;
         case 'task': $resp = new Resp(GetPage('./SPA/task.php')); break;
+        case 'enter': $resp = new Resp(GetPage('./SPA/enter.php')); break;
+        case 'profile': $resp = new Resp(GetPage('./SPA/profile.php')); break;
     }
 }
 

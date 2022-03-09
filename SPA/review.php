@@ -14,24 +14,24 @@
     Здесь вы можете посмотреть отзывы наших пользователей, а также оставить свой собственый. Мы Вам доверяем, поэтому публикуем отзывы без проверки. Пожалуйста, пишите грамотно.
 </p>
 
-<form class="reviewForm" enctype="multipart/form-data" method="POST">
+<form class="reviewForm">
     <p class="mainText">Напишите свой отзыв здесь:</p>
-    <textarea type="text" class="reviewArea" name="review" rows="5" cols="100"></textarea>
+    <textarea id="reviewArea" type="text" class="reviewArea" name="review" rows="5" cols="100"></textarea>
     
     <p class="radioMarks">
-        <span><input class="radioMark" name="mark" type="radio" value="1">1</span>
-        <span><input class="radioMark" name="mark" type="radio" value="2">2</span>
-        <span><input class="radioMark" name="mark" type="radio" value="3">3</span>
-        <span><input class="radioMark" name="mark" type="radio" value="4">4</span>
-        <span><input class="radioMark" name="mark" type="radio" value="5" checked>5</span>
+        <span><input id="radio1" class="radioMark" name="mark" type="radio" value="1">1</span>
+        <span><input id="radio2" class="radioMark" name="mark" type="radio" value="2">2</span>
+        <span><input id="radio3" class="radioMark" name="mark" type="radio" value="3">3</span>
+        <span><input id="radio4" class="radioMark" name="mark" type="radio" value="4">4</span>
+        <span><input id="radio5" class="radioMark" name="mark" type="radio" value="5" checked>5</span>
     </p>
 
-    <input type="hidden" name="MAX_FILE_SIZE" value="30000000" />
+    <input id="maxSize" type="hidden" name="MAX_FILE_SIZE" value="30000000" />
     <p class="mainText">Прикрепить картинку:
-        <input name="reviewPic" type="file" accept="image/*"/>
+        <input id="reviewFile" name="reviewPic" type="file" accept="image/*"/>
     </p>
     
-    <p><input class="sendButton" type="submit" value="Отправить"></p>
+    <p><input class="sendButton" type="button" value="Отправить" onclick="btnReviewOnClick()"></p>
 </form>
 
 <?php
@@ -71,11 +71,11 @@
     else $checked2 = "";
 ?>
 
-<form class="sortForm" method="POST">
+<form class="sortForm">
     <p class="mainText">Сортировать по:
-        <span><input class="radioMark" name="sort" type="radio" value="Time" <?php echo $checked1 ?> >дате</span>
-        <span><input class="radioMark" name="sort" type="radio" value="Mark" <?php echo $checked2 ?> >оценке</span>
-        <input class="sendSortButton" type="submit" value="Показать">
+        <span><input id="radioTime" class="radioMark" name="sort" type="radio" value="Time" <?php echo $checked1 ?> >дате</span>
+        <span><input id="radioMark" class="radioMark" name="sort" type="radio" value="Mark" <?php echo $checked2 ?> >оценке</span>
+        <input id="btnSort" class="sendSortButton" type="button" value="Показать" onclick="btnSortOnClick()">
     </p>
 </form>
 

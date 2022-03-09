@@ -1,4 +1,3 @@
-<script src="./modules/Table.js"></script>
 <?php>
     require './modules/MySql.php';
     require './modules/User.php';
@@ -35,33 +34,11 @@
     </div>
 </div>
 
-<form action="" class="checkForm" method="post">
+<form action="" class="checkForm">
 	<input id="currentPos" name="currentPos" value="" type="hidden">
-	<input class="checkInput" name="check" value="Проверить" type="submit">
+	<input class="checkInput" name="check" value="Проверить" type="button" onclick="btnCheckOnClick()">
 </form>
 
 <?php
-echo "<script> updateCycle(" . $rowCount . "," . $columnCount . ",'" . $pos . "');</script>";
-?>
-
-<?php
-    if ($_POST['currentPos'])
-    {
-        if (IsCorrectAnswer($_GET['task'], $_POST['currentPos']))
-        {
-            echo "<span class='winText'>Задача решена!</span>";
-            
-            if (isset($_SESSION['login']))
-            {
-                $task = GetTaskByPos($link, $_GET['task'], $_GET['columnCount']);
-                if ($task)
-                {
-                    AddTaskToUser($link, $_SESSION['login'], $task['ID']);
-                }
-            }
-        } else
-        {
-            echo "<span class='loseText'>Неверно!</span>";
-        }
-    } 
+    echo "<script> updateCycle(" . $rowCount . "," . $columnCount . ",'" . $pos . "'); </script>";
 ?>

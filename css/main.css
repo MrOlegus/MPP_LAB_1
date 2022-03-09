@@ -112,13 +112,11 @@ body {
 .winText {
     color: rgb(255, 255, 0);
     font-weight: normal;
-    font-size: 3vh;
 }
 
 .loseText {
     color: rgb(255, 255, 0);
     font-weight: normal;
-    font-size: 3vh;
 }
 
 .left {
@@ -152,4 +150,57 @@ body {
 .taskAndRows{
     display: flex;
     align-items: center;
+}
+
+/* enter.php */
+
+.enterForm {
+	background-color: rgb(187, 187, 187);
+	width: 430px;
+	height: 180px;
+	margin-left: calc(50vw - 215px);
+	margin-top: calc(50vh - 70px);
+	font-size: 25px;
+	
+	outline-style: solid;
+    outline-offset: -10px;
+    outline-width: 2px;
+	
+	box-shadow: 10px 10px;
+}
+
+.login, .password {
+	display: flex;
+	justify-content: space-between;
+	margin: 20px 20px 20px 20px;
+}
+
+.enterAndRegistration {
+	display: flex;
+	justify-content: space-around;
+	margin: 20px 20px 20px 20px;
+}
+
+.loginInput, .passwordInput {
+	outline: none;
+	font-size: 25px;
+}
+
+.enterInput, .registrationInput {
+	flex-grow: 1;
+	outline: none;
+	font-size: 25px;
+}
+
+.enterInput {
+	margin-right: 10px;
+}
+
+.errorText
+{
+    display: flex;
+    justify-content: space-around;
+    color: rgb(255, 255, 0);
+    font-size: 15px;
+    margin-top: 20px;
 }

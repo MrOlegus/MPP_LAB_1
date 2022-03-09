@@ -263,6 +263,72 @@ function Injector(options) {
 
 	init();
 }
+      
+function btnCheckOnClick() { // обработчик отправки решения
+    const searchString = new URLSearchParams(window.location.search);
+
+    let json = JSON.stringify({
+      currentPos: document.getElementById("currentPos").getAttribute("value"),
+      startPos: searchString.get("task")
+    });
+
+    SendPostRequest("", json, "taskAnswer");
+}
+
+function btnSortOnClick() { // обработчик сортировки отзывов
+    let radioTime = document.getElementById("radioTime");
+    let radioMark = document.getElementById("radioMark");
+    let radioChecked = radioTime.cheched ? radioTime : radioMark;
+
+    let json = JSON.stringify({
+      sort: radioChecked.getAttribute("value"),
+    });
+
+    SendPostRequest("", json, "review");
+}
+
+function btnReviewOnClick() { // обработчик отправки отзыва
+    let radio1 = document.getElementById("radio1");
+    let radio2 = document.getElementById("radio2");
+    let radio3 = document.getElementById("radio3");
+    let radio4 = document.getElementById("radio4");
+    let radio5 = document.getElementById("radio5");
+                
+    let radioChecked = radio1;
+    if (radio2.checked) radioChecked = radio2;
+    if (radio3.checked) radioChecked = radio3;
+    if (radio4.checked) radioChecked = radio4;
+    if (radio5.checked) radioChecked = radio5;
+    
+    let json = JSON.stringify({
+      mark: radioChecked.getAttribute("value"),
+      review: document.getElementById("reviewArea").value,
+      reviewPic: document.getElementById("reviewFile").getAttribute("value"),
+      MAX_FILE_SIZE: document.getElementById("maxSize").getAttribute("value"),
+    });
+
+    SendPostRequest("", json, "review");
+}
+
+function btnEnterOnClick() { // обработчик авторизации
+    let json = JSON.stringify({
+      login: document.getElementById("editLogin").value,
+      password: document.getElementById("editPassword").value,
+      enter: document.getElementById("btnEnter").value,
+    });
+    
+    SendPostRequest("", json, "enter");
+}
+
+function btnRegistrationOnClick() { // обработчик регистрации
+    let json = JSON.stringify({
+      login: document.getElementById("editLogin").value,
+      password: document.getElementById("editPassword").value,
+      registration: document.getElementById("btnRegistration").value,
+    });
+
+    SendPostRequest("", json, "enter");
+}
 
 var links = null; //Создаём переменную, в которой будут храниться ссылки
 
@@ -310,15 +376,6 @@ function LinkClick(href)
 {
     let props = href.split("/")[0].split("?");
     let args = href.split("?")[1];
-    console.log("/////////////////////");
-    console.log("href");
-    console.log(href);
-    console.log("props");
-    console.log(props);
-    console.log("args");
-    console.log(args);
-    console.log("////////////////////");
-    
     let query = "";
     switch(props[0])
     {
@@ -327,9 +384,10 @@ function LinkClick(href)
    	 case "play": query += "?page=play"; break;
    	 case "review": query += "?page=review"; break;
    	 case "task": query += "?page=task"; break;
+   	 case "enter": query += "?page=enter"; break;
+   	 case "profile": query += "?page=profile"; break;
     }
     if (args != undefined) query += "&" + args;
-    console.log(query);
     SendRequest(query, href);
 }
 
@@ -365,6 +423,41 @@ function SendRequest(query, link)
     //Устанавливаем таймер, который покажет сообщение о загрузке, если она не завершится через 2 секунды
     //setTimeout(ShowLoading, 2000);
     xhr.send(); //Отправляем запрос
+}
+
+function SendPostRequest(query, body, link)
+{
+    //console.log("SendRequest " + query + " " + link)
+    
+    let xhr = new XMLHttpRequest(); //Создаём объект для отправки запроса
+
+    xhr.open("POST", "/SPA.php" + query, true); //Открываем соединение
+    xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+    
+    xhr.onreadystatechange = function() //Указываем, что делать, когда будет получен ответ от сервера
+    {
+   	 if (xhr.readyState != 4) return; //Если это не тот ответ, который нам нужен, ничего не делаем
+
+   	 //Иначе говорим, что сайт загрузился
+   	 loaded = true;
+
+   	 if (xhr.status == 200) //Если ошибок нет, то получаем данные
+   	 {
+   	     //console.log(xhr.responseText);
+   		 GetData(JSON.parse(xhr.responseText), link);
+   	 }
+   	 else //Иначе выводим сообщение об ошибке
+   	 {
+   		 alert("Loading error! Try again later.");
+   		 //console.log(xhr.status + ": " + xhr.statusText);
+   	 }
+    }
+
+    loaded = false; //Говорим, что идёт загрузка
+
+    //Устанавливаем таймер, который покажет сообщение о загрузке, если она не завершится через 2 секунды
+    //setTimeout(ShowLoading, 2000);
+    xhr.send(body); //Отправляем запрос
 }
 
 function GetData(response, link) //Получаем данные
