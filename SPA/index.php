@@ -9,14 +9,6 @@
     
     $link = MySqlConnect();
     AddVisiting($link, "index.php");
-
-    $enterHeaderWord = $_SESSION['login'];
-    $enterHeaderWordRef = "profile.php";
-    if ($enterHeaderWord == "") 
-    {
-        $enterHeaderWord = "войти";
-        $enterHeaderWordRef = "registration.php";
-    }
 ?>
 
 <p class = mainText>

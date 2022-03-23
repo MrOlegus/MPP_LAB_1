@@ -330,6 +330,14 @@ function btnRegistrationOnClick() { // обработчик регистраци
     SendPostRequest("", json, "enter");
 }
 
+function btnExitOnClick() { // обработчик отправки отзыва
+    let json = JSON.stringify({
+      exit: document.getElementById("btnExit").value,
+    });
+    
+    SendPostRequest("", json, "enter");
+}
+
 var links = null; //Создаём переменную, в которой будут храниться ссылки
 
 var loaded = true; //Переменная, которая обозначает, загрузилась ли страница
@@ -337,7 +345,8 @@ var loaded = true; //Переменная, которая обозначает, 
 var data = //Данные о странице
 {
     body: "",
-    link: ""
+    link: "",
+    login: "",
 };
 
 var page = //Элементы, текст в которых будет меняться
@@ -421,7 +430,7 @@ function SendRequest(query, link)
     loaded = false; //Говорим, что идёт загрузка
 
     //Устанавливаем таймер, который покажет сообщение о загрузке, если она не завершится через 2 секунды
-    //setTimeout(ShowLoading, 2000);
+    setTimeout(ShowLoading, 2000);
     xhr.send(); //Отправляем запрос
 }
 
@@ -431,6 +440,9 @@ function SendPostRequest(query, body, link)
     
     let xhr = new XMLHttpRequest(); //Создаём объект для отправки запроса
 
+    loaded = false; //Говорим, что идёт загрузка
+    setTimeout(ShowLoading, 2000);
+    
     xhr.open("POST", "/SPA.php" + query, true); //Открываем соединение
     xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
     
@@ -453,10 +465,6 @@ function SendPostRequest(query, body, link)
    	 }
     }
 
-    loaded = false; //Говорим, что идёт загрузка
-
-    //Устанавливаем таймер, который покажет сообщение о загрузке, если она не завершится через 2 секунды
-    //setTimeout(ShowLoading, 2000);
     xhr.send(body); //Отправляем запрос
 }
 
@@ -467,7 +475,8 @@ function GetData(response, link) //Получаем данные
     data =
     {
    	 body: response.body,
-   	 link: link
+   	 link: link,
+   	 login: response.login,
     };
 
     UpdatePage(); //Обновляем контент на странице
@@ -475,11 +484,11 @@ function GetData(response, link) //Получаем данные
 
 function ShowLoading()
 {
-    //console.log("ShowLoading")
+    console.log("ShowLoading")
     
     if(!loaded) //Если страница ещё не загрузилась, то выводим сообщение о загрузке
     {
-   	 page.body.innerHTML = "Loading...";
+   	 page.body.innerHTML = "<h1>Loading...</h1>";
     }
 }
 
@@ -492,9 +501,20 @@ function UpdatePage() //Обновление контента
 		
 	injector.oncomplete = function() {
 	    console.log('All scripts inserted');
-		InitLinks(); //Инициализируем новые ссылки
 	}	
-
+    
     window.history.pushState(data.body, data.title, data.link); //Меняем ссылку
     InitLinks(); //Инициализируем новые ссылки
+    
+    let refEnter = document.getElementById("refEnter");
+    if (data.login)
+    {
+        refEnter.href = "profile";
+        refEnter.innerHTML = data.login;
+    }
+    else
+    {
+        refEnter.href = "enter";
+        refEnter.innerHTML = "Войти";
+    }
 }

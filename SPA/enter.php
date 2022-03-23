@@ -41,7 +41,7 @@
                 RegisterUser($link, $_POST['login'], $_POST['password']);
                 EnterUser($_POST['login']);
                 //header("Location: http://f0586911.xsph.ru");
-                //echo "<h1>Вы успешно зарегистрировались<h1>";
+                echo "<script>window.location.href = \"http://f0586911.xsph.ru\";</script>";
             }
         } else
         {
@@ -55,7 +55,7 @@
         {
             EnterUser($_POST['login']);
             //header("Location: http://f0586911.xsph.ru");
-            //echo "<h1>Вы успешно авториизовались<h1>";
+            echo "<script>window.location.href = \"http://f0586911.xsph.ru\";</script>";
         } else
         {
             $errorText = GetWrongPasswordOrLoginMessage();

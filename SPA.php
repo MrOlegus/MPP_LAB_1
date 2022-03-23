@@ -9,7 +9,8 @@ header("Content-type: application/json; charset=utf-8");
 class Resp
 {
     public $body;
-
+    public $login;
+    
     public function __construct($body)
     {
    	    $this->body = $body;
@@ -24,6 +25,11 @@ $data = json_decode($postData, true);
 foreach(array_keys($data) as $key)
     $_POST[$key] = $data[$key];
 
+if (isset($_POST['exit'])) // выход из профиля
+{
+    $resp = new Resp(GetPage('./SPA/profile.php'));
+}
+else
 if (isset($_POST['registration'])) // регистрация
 {
     $resp = new Resp(GetPage('./SPA/enter.php'));
@@ -63,6 +69,8 @@ if (isset($_GET['page'])) // клиент просит страничку
         case 'profile': $resp = new Resp(GetPage('./SPA/profile.php')); break;
     }
 }
+
+$resp->login = $_SESSION['login'];
 
 //echo $resp->body;
 die(json_encode($resp)); //Возвращаем страницу
