@@ -2,11 +2,13 @@
 
 require_once('./modules/SPA.php');
 
-//Указываем в заголовках, что страница возвращает данные в формате JSON
-header("Content-type: application/json; charset=utf-8");
+include_once './JWT/Server/BeforeValidException.php';
+include_once './JWT/Server/ExpiredException.php';
+include_once './JWT/Server/SignatureInvalidException.php';
+include_once './JWT/Server/src/JWT.php';
+use \Firebase\JWT\JWT;
 
-//Создаём класс, который будем возвращать
-class Resp
+class Resp //Создаём класс, который будем возвращать
 {
     public $body;
     public $login;
@@ -17,6 +19,9 @@ class Resp
     }
 }
 
+//Указываем в заголовках, что страница возвращает данные в формате JSON
+header("Content-type: application/json; charset=utf-8");
+
 $resp = new Resp('<h1>oops<h1>');
 
 $postData = file_get_contents('php://input');
@@ -24,6 +29,12 @@ $data = json_decode($postData, true);
 
 foreach(array_keys($data) as $key)
     $_POST[$key] = $data[$key];
+
+if ($_GET['page'] == 'play')
+{
+    http_response_code(401);
+    return;
+}
 
 if (isset($_POST['exit'])) // выход из профиля
 {
